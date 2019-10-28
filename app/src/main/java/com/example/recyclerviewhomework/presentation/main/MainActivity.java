@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recyclerviewhomework.R;
 import com.example.recyclerviewhomework.adapter.UserArrayAdapter;
+import com.example.recyclerviewhomework.model.User;
 import com.example.recyclerviewhomework.pagenation.PaginationListener;
 
 import java.util.ArrayList;
@@ -41,9 +42,9 @@ public class MainActivity extends AppCompatActivity {
             String name = names[i];
             String dateOfBirth = birthDates[i];
             Uri uri = Uri.parse(images[i]);
-//            userList.add(new User(name, dateOfBirth,
-//                    "Description " + i + "\nCool Person"
-//                            + "\nGreat Guy!", uri));
+            userList.add(new User(name, dateOfBirth,
+                    "Description " + i + "\nCool Person"
+                            + "\nGreat Guy!", uri));
         }
     }
 
