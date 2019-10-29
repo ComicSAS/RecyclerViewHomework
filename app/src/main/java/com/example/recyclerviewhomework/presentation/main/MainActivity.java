@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             String dateOfBirth = birthDates[i];
             Uri uri = Uri.parse(images[i]);
             userList.add(new User(name, dateOfBirth,
-                    "Description " + i + "\nCool Person"
+                    "Description " + "\nCool Person"
                             + "\nGreat Guy!", uri));
         }
     }

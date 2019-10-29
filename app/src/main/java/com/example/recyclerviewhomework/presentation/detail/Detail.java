@@ -13,6 +13,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.recyclerviewhomework.R;
 
+import java.util.Objects;
+
 public class Detail extends AppCompatActivity {
 
     Intent intent;
@@ -47,6 +49,7 @@ public class Detail extends AppCompatActivity {
         ivAvatar = findViewById(R.id.ivDetailAvatar);
         recyclerView = findViewById(R.id.rvDetail);
 
+        Objects.requireNonNull(getSupportActionBar()).setTitle(name);
         Glide.with(this).load(uri).circleCrop()
                 .apply(RequestOptions.circleCropTransform()).dontAnimate().into(ivAvatar);
         tvBirthDate.setText(birthDate);
