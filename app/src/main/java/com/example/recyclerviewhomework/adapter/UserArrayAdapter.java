@@ -52,6 +52,5 @@ public class UserArrayAdapter extends RecyclerView.Adapter<UserViewHolder> {
             //update state of list inside Adapter
             notifyDataSetChanged();
         }
-
     }
 }

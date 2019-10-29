@@ -1,7 +1,6 @@
 package com.example.recyclerviewhomework.adapter;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -44,10 +43,9 @@ public class UserViewHolder extends RecyclerView.ViewHolder implements View.OnCl
                 .apply(RequestOptions.circleCropTransform()).dontAnimate().into(ivItem);
 
         intent = new Intent(itemView.getContext(), Detail.class);
-        intent.putExtra("name", tvName.getText().toString());
-        intent.putExtra("description", tvDescription.getText().toString());
-        intent.putExtra("birthView", tvBirthDate.getText().toString());
-        // TODO: 28.10.2019 andrey check please 
-        //intent.putExtra("image", ivItem.getImageAlpha());
+        intent.putExtra("name", user.getName());
+        intent.putExtra("description", user.getDescription());
+        intent.putExtra("birthDate", user.getBirthDate());
+        intent.setData(user.getImage());
     }
 }

@@ -1,18 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.detail.Detail">
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/ivDetailAvatar"
+        android:layout_width="@dimen/view_params_200"
+        android:layout_height="@dimen/view_params_200"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/indentation_16" />
+
+    <TextView
+        android:id="@+id/tvDetailBirthDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/indentation_8"
+        android:textSize="@dimen/txt_size_20" />
+
+    <TextView
+        android:id="@+id/tvDetailDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/indentation_16"
+        android:layout_marginTop="@dimen/indentation_16"
+        android:layout_marginEnd="@dimen/indentation_16"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/txt_size_16" />
+
+    <include layout="@layout/divider" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/indentation_10"
-        android:layout_marginTop="@dimen/indentation_10"
-        android:text="Activity Detail"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:text="@string/gallery"
+        android:layout_gravity="center_horizontal"
+        android:textSize="@dimen/txt_size_20"
+        android:textColor="@android:color/black"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <include layout="@layout/divider" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/indentation_16"
+        android:layout_marginTop="@dimen/indentation_16"
+        android:layout_marginEnd="@dimen/indentation_16">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>
