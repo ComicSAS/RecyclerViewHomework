@@ -16,10 +16,10 @@ import com.example.recyclerviewhomework.presentation.detail.Detail;
 
 public class UserViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    public TextView tvName, tvDescription, tvBirthDate;
-    public ImageView ivItem;
+    private TextView tvName, tvDescription, tvBirthDate;
+    private ImageView ivItem;
 
-    Intent intent;
+    private Intent intent;
 
     public UserViewHolder(@NonNull View itemView) {
         super(itemView);
