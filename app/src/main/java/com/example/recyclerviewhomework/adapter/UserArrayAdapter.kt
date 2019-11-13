@@ -1,16 +1,14 @@
 package com.example.recyclerviewhomework.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-
 import com.example.recyclerviewhomework.R
 import com.example.recyclerviewhomework.model.User
+import com.example.recyclerviewhomework.presentation.IClickListener
+import java.util.*
 
-import java.util.ArrayList
-
-class UserArrayAdapter : RecyclerView.Adapter<UserViewHolder>() {
+class UserArrayAdapter(private val onItemClick: IClickListener<User>) : RecyclerView.Adapter<UserViewHolder>() {
 
     private val userList: ArrayList<User>?
 
@@ -22,7 +20,7 @@ class UserArrayAdapter : RecyclerView.Adapter<UserViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.item, parent, false)
-        return UserViewHolder(view)
+        return UserViewHolder(view, onItemClick)
     }
 
     // load data in each row element
