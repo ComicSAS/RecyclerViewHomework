@@ -31,12 +31,13 @@ class MainActivity : AppCompatActivity() {
     internal var images = imageArray
 
     val onItemClick = object : IClickListener<User> {
-        override fun onItemClick(model: User) {
+        override fun onItemClick(model: User): Boolean {
             intentDetail.putExtra("name", model.name)
             intentDetail.putExtra("description", model.description)
             intentDetail.putExtra("birthDate", model.birthDate)
             intentDetail.data = model.image
             startActivity(intentDetail)
+            return true
         }
 
     }

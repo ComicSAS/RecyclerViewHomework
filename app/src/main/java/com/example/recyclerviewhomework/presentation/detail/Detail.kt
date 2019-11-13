@@ -15,6 +15,7 @@ import com.example.recyclerviewhomework.R
 import com.example.recyclerviewhomework.adapter.GalleryArrayAdapter
 import com.example.recyclerviewhomework.model.DataClass.imageArray
 import com.example.recyclerviewhomework.model.Gallery
+import com.example.recyclerviewhomework.presentation.IClickListener
 import java.util.*
 
 class Detail : AppCompatActivity() {
@@ -22,10 +23,6 @@ class Detail : AppCompatActivity() {
     var pictures = imageArray
 
     var galleryList = ArrayList<Gallery>()
-
-    val galleryArrayAdapter = GalleryArrayAdapter()
-
-//    lateinit var intent: Intent
 
     lateinit var tvDescription: TextView
     lateinit var tvBirthDate: TextView
@@ -37,6 +34,15 @@ class Detail : AppCompatActivity() {
     lateinit var name: String
     lateinit var birthDate: String
     lateinit var description: String
+
+
+    private val onLongItemClick = object : IClickListener<Gallery> {
+        override fun onItemClick(model: Gallery): Boolean {
+            galleryArrayAdapter.removeItem(galleryList.indexOf(model))
+            return true
+        }
+    }
+    private val galleryArrayAdapter = GalleryArrayAdapter()
 
     var uri: Uri? = null
 
@@ -55,7 +61,7 @@ class Detail : AppCompatActivity() {
     }
 
     private fun setUI() {
-        val intent = getIntent()
+        val intent = intent
         uri = intent.data
         name = intent.getStringExtra("name")
         birthDate = intent.getStringExtra("birthDate")

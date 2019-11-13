@@ -1,40 +1,38 @@
 package com.example.recyclerviewhomework.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-
 import com.example.recyclerviewhomework.R
 import com.example.recyclerviewhomework.model.Gallery
+import com.example.recyclerviewhomework.presentation.IClickListener
+import java.util.*
 
-import java.util.ArrayList
+class GalleryArrayAdapter : RecyclerView.Adapter<GallaryViewHolder>() {
 
-class GalleryArrayAdapter : RecyclerView.Adapter<GallaryViewHolder>(), View.OnLongClickListener {
+    private val galleryList: ArrayList<Gallery> = ArrayList()
 
-    private val galleryList: ArrayList<Gallery>?
+    private val onLongItemClick = object:IClickListener<Gallery>{
+        override fun onItemClick(model: Gallery): Boolean {
+            removeItem(galleryList.indexOf(model))
+            return true
+        }
 
-    init {
-        this.galleryList = ArrayList()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GallaryViewHolder {
         val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.gallery_item, parent, false)
-        val holder = GallaryViewHolder(view)
-        holder.ivPicture.setOnLongClickListener(this@GalleryArrayAdapter)
-
-        holder.ivPicture.tag = holder
-        return holder
+        return GallaryViewHolder(view, onLongItemClick)
     }
 
     override fun onBindViewHolder(holder: GallaryViewHolder, position: Int) {
-        val gallery = galleryList!![position]
+        val gallery = galleryList[position]
         holder.bindPicture(gallery)
     }
 
     override fun getItemCount(): Int {
-        return galleryList?.size ?: 0
+        return galleryList.size
     }
 
     fun addItems(gallery: List<Gallery>?) {
@@ -43,20 +41,15 @@ class GalleryArrayAdapter : RecyclerView.Adapter<GallaryViewHolder>(), View.OnLo
         else if (gallery.isEmpty())
             return
         else {
-            galleryList!!.addAll(gallery)
+            galleryList.addAll(gallery)
             //update state of list inside Adapter
             notifyDataSetChanged()
         }
     }
 
     fun removeItem(position: Int) {
-        galleryList!!.removeAt(position)
+        galleryList.removeAt(position)
         notifyItemRemoved(position)
     }
 
-    override fun onLongClick(v: View): Boolean {
-        val holder = v.tag as GallaryViewHolder
-        removeItem(holder.position)
-        return false
-    }
 }

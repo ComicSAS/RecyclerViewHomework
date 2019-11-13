@@ -7,8 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.recyclerviewhomework.R
 import com.example.recyclerviewhomework.model.Gallery
+import com.example.recyclerviewhomework.presentation.IClickListener
 
-class GallaryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class GallaryViewHolder(itemView: View, private val onLongItemClick: IClickListener<Gallery>) : RecyclerView.ViewHolder(itemView) {
 
     var ivPicture: ImageView
 
@@ -17,6 +18,7 @@ class GallaryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     }
 
     fun bindPicture(gallery: Gallery) {
+        itemView.setOnLongClickListener { onLongItemClick.onItemClick(gallery) }
         Glide.with(itemView.context)
                 .load(gallery.picture).dontAnimate().into(ivPicture)
     }
