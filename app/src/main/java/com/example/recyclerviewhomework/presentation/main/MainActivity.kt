@@ -6,7 +6,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerviewhomework.R
 import com.example.recyclerviewhomework.adapter.UserArrayAdapter
 import com.example.recyclerviewhomework.model.DataClass.dateOfBirthArray

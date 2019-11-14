@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerviewhomework.R
 import com.example.recyclerviewhomework.adapter.GalleryArrayAdapter
 import com.example.recyclerviewhomework.databinding.ActivityDetailBinding

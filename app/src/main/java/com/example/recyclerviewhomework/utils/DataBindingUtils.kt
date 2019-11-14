@@ -18,7 +18,6 @@ object DataBindingUtils {
     @JvmStatic
     @BindingAdapter("bind:picture_url")
     fun loadPicture(iv: ImageView, url: Uri?) {
-        Glide.with(iv.context)
-                .load(url).dontAnimate().into(iv)
+        Glide.with(iv.context).load(url).centerCrop().dontAnimate().into(iv)
     }
 }

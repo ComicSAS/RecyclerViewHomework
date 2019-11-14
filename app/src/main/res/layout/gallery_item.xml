@@ -20,6 +20,7 @@
             android:id="@+id/ivPicture"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/indentation_8"
             android:gravity="center"
             bind:picture_url="@{gallery.picture}"
             tools:ignore="ContentDescription" />
