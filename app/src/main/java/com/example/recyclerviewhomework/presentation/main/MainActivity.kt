@@ -16,13 +16,12 @@ import com.example.recyclerviewhomework.model.User
 import com.example.recyclerviewhomework.pagenation.PaginationListener
 import com.example.recyclerviewhomework.presentation.IClickListener
 import com.example.recyclerviewhomework.presentation.detail.Detail
+import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var intentDetail: Intent
-
-    lateinit var recyclerView: RecyclerView
 
     internal var userList = ArrayList<User>()
 
@@ -64,16 +63,15 @@ class MainActivity : AppCompatActivity() {
     protected fun initRecyclerView() {
         intentDetail = Intent(this, Detail::class.java)
         val userArrayAdapter = UserArrayAdapter(onItemClick)
-        recyclerView = findViewById(R.id.item_list)
         // use a linear layout manager
         val layoutManager = LinearLayoutManager(this)
-        recyclerView.layoutManager = layoutManager
-        recyclerView.itemAnimator = DefaultItemAnimator()
-        recyclerView.adapter = userArrayAdapter
+        item_list.layoutManager = layoutManager
+        item_list.itemAnimator = DefaultItemAnimator()
+        item_list.adapter = userArrayAdapter
         initData()
         userArrayAdapter.addItems(userList)
 
-        recyclerView.addOnScrollListener(object : PaginationListener(layoutManager) {
+        item_list.addOnScrollListener(object : PaginationListener(layoutManager) {
             override fun loadMoreItems() {
                 userArrayAdapter.addItems(userList)
             }

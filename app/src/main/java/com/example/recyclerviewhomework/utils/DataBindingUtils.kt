@@ -14,4 +14,11 @@ object DataBindingUtils {
         Glide.with(iv.context).load(url).circleCrop()
                 .apply(RequestOptions.circleCropTransform()).dontAnimate().into(iv)
     }
+
+    @JvmStatic
+    @BindingAdapter("bind:picture_url")
+    fun loadPicture(iv: ImageView, url: Uri?) {
+        Glide.with(iv.context)
+                .load(url).dontAnimate().into(iv)
+    }
 }
