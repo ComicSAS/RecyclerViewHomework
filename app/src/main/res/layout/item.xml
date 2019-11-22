@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="User"
+            type="com.example.recyclerviewhomework.model.User" />
+    </data>
+
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -11,6 +20,7 @@
         android:orientation="horizontal">
 
         <ImageView
+            app:imageUrl="@{User.image}"
             android:id="@+id/ivItem"
             android:layout_width="@dimen/indentation_100"
             android:layout_height="@dimen/indentation_100" />
@@ -21,11 +31,12 @@
             android:orientation="vertical">
 
             <TextView
+
                 android:id="@+id/tvName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/indentation_16"
-                android:text="@string/name"
+                android:text="@{User.name}"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/txt_size_26" />
 
@@ -34,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/indentation_16"
-                android:text="@string/birth_date"
+                android:text="@{User.birthDate}"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/txt_size_26" />
         </LinearLayout>
@@ -47,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/indentation_16"
         android:layout_marginEnd="@dimen/indentation_16"
-        android:text="@string/description"
+        android:text="@{User.description}"
         android:textColor="@android:color/black"
         android:textSize="@dimen/txt_size_26" />
 
@@ -55,3 +66,4 @@
 
 
 </LinearLayout>
+</layout>

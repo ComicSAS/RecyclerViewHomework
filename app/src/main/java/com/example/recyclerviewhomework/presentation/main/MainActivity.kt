@@ -2,22 +2,18 @@ package com.example.recyclerviewhomework.presentation.main
 
 import android.net.Uri
 import android.os.Bundle
-
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
 import com.example.recyclerviewhomework.R
 import com.example.recyclerviewhomework.adapter.UserArrayAdapter
-import com.example.recyclerviewhomework.model.User
-import com.example.recyclerviewhomework.pagenation.PaginationListener
-
-import java.util.ArrayList
-
 import com.example.recyclerviewhomework.model.DataClass.dateOfBirthArray
 import com.example.recyclerviewhomework.model.DataClass.imageArray
 import com.example.recyclerviewhomework.model.DataClass.nameArray
+import com.example.recyclerviewhomework.model.User
+import com.example.recyclerviewhomework.pagenation.PaginationListener
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 

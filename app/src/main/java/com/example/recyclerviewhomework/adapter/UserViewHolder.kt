@@ -34,6 +34,7 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.O
     }
 
     fun bindData(user: User) {
+        //to do set onclick   
         tvName.text = user.name
         tvDescription.text = user.description
         tvBirthDate.text = user.birthDate
