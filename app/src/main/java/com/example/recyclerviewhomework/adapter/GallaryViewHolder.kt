@@ -1,23 +1,15 @@
 package com.example.recyclerviewhomework.adapter
 
-import android.view.View
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-
-import com.bumptech.glide.Glide
-import com.example.recyclerviewhomework.R
+import com.example.recyclerviewhomework.databinding.GalleryItemBinding
 import com.example.recyclerviewhomework.model.Gallery
+import com.example.recyclerviewhomework.presentation.IClickListener
 
-class GallaryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-    var ivPicture: ImageView
-
-    init {
-        ivPicture = itemView.findViewById(R.id.ivPicture)
-    }
+class GallaryViewHolder(var binding: GalleryItemBinding, private val onLongItemClick: IClickListener<Gallery>) : RecyclerView.ViewHolder(binding.root) {
 
     fun bindPicture(gallery: Gallery) {
-        Glide.with(itemView.context)
-                .load(gallery.picture).dontAnimate().into(ivPicture)
+        itemView.setOnLongClickListener { onLongItemClick.onItemClick(gallery) }
+        binding.gallery = gallery
+        binding.executePendingBindings()
     }
 }

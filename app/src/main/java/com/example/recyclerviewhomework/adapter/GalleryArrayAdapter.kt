@@ -1,31 +1,31 @@
 package com.example.recyclerviewhomework.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-
 import com.example.recyclerviewhomework.R
+import com.example.recyclerviewhomework.databinding.GalleryItemBinding
 import com.example.recyclerviewhomework.model.Gallery
+import com.example.recyclerviewhomework.presentation.IClickListener
+import java.util.*
 
-import java.util.ArrayList
+class GalleryArrayAdapter : RecyclerView.Adapter<GallaryViewHolder>() {
 
-class GalleryArrayAdapter : RecyclerView.Adapter<GallaryViewHolder>(), View.OnLongClickListener {
+    private val galleryList: ArrayList<Gallery>? = ArrayList()
 
-    private val galleryList: ArrayList<Gallery>?
+    private val onLongItemClick = object : IClickListener<Gallery> {
+        override fun onItemClick(model: Gallery): Boolean {
+            removeItem(galleryList!!.indexOf(model))
+            return true
+        }
 
-    init {
-        this.galleryList = ArrayList()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GallaryViewHolder {
         val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.gallery_item, parent, false)
-        val holder = GallaryViewHolder(view)
-        holder.ivPicture.setOnLongClickListener(this@GalleryArrayAdapter)
-
-        holder.ivPicture.tag = holder
-        return holder
+        val binding: GalleryItemBinding = DataBindingUtil.inflate(view, R.layout.gallery_item, parent, false)
+        return GallaryViewHolder(binding, onLongItemClick)
     }
 
     override fun onBindViewHolder(holder: GallaryViewHolder, position: Int) {
@@ -54,9 +54,4 @@ class GalleryArrayAdapter : RecyclerView.Adapter<GallaryViewHolder>(), View.OnLo
         notifyItemRemoved(position)
     }
 
-    override fun onLongClick(v: View): Boolean {
-        val holder = v.tag as GallaryViewHolder
-        removeItem(holder.position)
-        return false
-    }
 }
