@@ -5,7 +5,7 @@
 <data>
     <variable
         name="user"
-        type="com.example.recyclerviewhomework.model.User" />
+        type="com.example.recyclerviewhomework.usecases.repository.data_source.database.entity.User" />
 </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

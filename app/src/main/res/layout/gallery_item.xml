@@ -7,7 +7,7 @@
 
         <variable
             name="gallery"
-            type="com.example.recyclerviewhomework.model.Gallery" />
+            type="com.example.recyclerviewhomework.usecases.repository.data_source.database.entity.Gallery" />
     </data>
 
     <LinearLayout
