@@ -2,7 +2,6 @@ package com.example.recyclerviewhomework.presentation.activities.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recyclerviewhomework.R
@@ -50,11 +49,12 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
         initRecyclerView()
         initViewModel()
-    }
 
-    override fun onDestroy() {
-        super.onDestroy()
-//        viewModel?.clearDatabase()
+        item_list.addOnScrollListener(object : PaginationListener(layoutManager) {
+            override fun loadMoreItems() {
+                viewModel?.getAllItems()
+            }
+        })
     }
 
     private fun initViewModel() {
@@ -65,15 +65,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun loadData(list: MutableList<User>) {
-        Log.d("myLog", "MainActivity: list.count() = ${list.count()}")
         userArrayAdapter.addItems(list)
-
-        item_list.addOnScrollListener(object : PaginationListener(layoutManager) {
-            override fun loadMoreItems() {
-                Log.d("myLog", "MainActivity: onScroll")
-                viewModel?.getAllItems()
-            }
-        })
     }
 
     private fun initRecyclerView() {
