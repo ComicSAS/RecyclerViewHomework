@@ -24,7 +24,7 @@ class AppRepository(private val serverCommunicator: ServerCommunicator, private 
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 
-    fun clearDatabase() {
-        mainDatabase.clearAllTables()
+    fun clearUsersTable() {
+        mainDatabase.userDao().clearTable()
     }
 }

@@ -10,7 +10,7 @@ class Interactor(private val repository: AppRepository) {
 
     fun getUser(id: Int): Single<User> = repository.getUser(id)
 
-    fun clearDatabase(){
-        repository.clearDatabase()
+    fun clearUsersTable(){
+        repository.clearUsersTable()
     }
 }

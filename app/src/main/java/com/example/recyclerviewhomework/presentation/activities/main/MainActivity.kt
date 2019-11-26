@@ -24,7 +24,9 @@ class MainActivity : BaseActivity() {
 
     lateinit var intentDetail: Intent
 
-    private val userList = mutableListOf<User>()
+    private lateinit var userArrayAdapter: UserArrayAdapter
+
+    private lateinit var layoutManager: LinearLayoutManager
 
     val onItemClick = object : IClickListener<User> {
         override fun onItemClick(model: User): Boolean {
@@ -46,7 +48,7 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        initRecyclerView()
         initViewModel()
     }
 
@@ -56,37 +58,31 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initViewModel() {
+        viewModel?.clearUsersTable()
         viewModel?.getAllItems()
         viewModel?.getLiveDataItems()?.observe(this,
-                androidx.lifecycle.Observer { initRecyclerView(it) })
+                androidx.lifecycle.Observer { loadData(it) })
     }
 
-    private fun initRecyclerView(list: MutableList<User>) {
-        Log.d("myLog", "list.isEmpty() = " + list.isEmpty())
-        val tmpUserList = mutableListOf<User>()
-        if (userList.count() < list.count()) {
-            for (i in userList.count()..list.count())
-                tmpUserList.add(list[i])
-            userList.addAll(tmpUserList)
-        }
-
-
-
-        intentDetail = Intent(this, Detail::class.java)
-        val userArrayAdapter = UserArrayAdapter(onItemClick)
-        // use a linear layout manager
-        val layoutManager = LinearLayoutManager(this)
-        item_list.layoutManager = layoutManager
-        item_list.itemAnimator = DefaultItemAnimator()
-        item_list.adapter = userArrayAdapter
-        userArrayAdapter.addItems(tmpUserList)
+    private fun loadData(list: MutableList<User>) {
+        Log.d("myLog", "MainActivity: list.count() = ${list.count()}")
+        userArrayAdapter.addItems(list)
 
         item_list.addOnScrollListener(object : PaginationListener(layoutManager) {
             override fun loadMoreItems() {
-//                initViewModel()
+                Log.d("myLog", "MainActivity: onScroll")
                 viewModel?.getAllItems()
-                userArrayAdapter.addItems(tmpUserList)
             }
         })
+    }
+
+    private fun initRecyclerView() {
+        intentDetail = Intent(this, Detail::class.java)
+        userArrayAdapter = UserArrayAdapter(onItemClick)
+        // use a linear layout manager
+        layoutManager = LinearLayoutManager(this)
+        item_list.layoutManager = layoutManager
+        item_list.itemAnimator = DefaultItemAnimator()
+        item_list.adapter = userArrayAdapter
     }
 }

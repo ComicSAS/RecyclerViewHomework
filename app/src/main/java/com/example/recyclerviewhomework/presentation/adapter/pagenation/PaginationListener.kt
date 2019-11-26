@@ -1,9 +1,10 @@
 package com.example.recyclerviewhomework.presentation.adapter.pagenation
 
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class PaginationListener protected constructor(private val layoutManager: LinearLayoutManager) : RecyclerView.OnScrollListener() {
+abstract class PaginationListener(private val layoutManager: LinearLayoutManager) : RecyclerView.OnScrollListener() {
 
     private var visibleItemCount: Int = 0
     private var totalItemCount: Int = 0
@@ -15,11 +16,12 @@ abstract class PaginationListener protected constructor(private val layoutManage
             visibleItemCount = layoutManager.childCount
             totalItemCount = layoutManager.itemCount
             firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
-
             if (visibleItemCount + firstVisibleItemPosition >= totalItemCount) {
+                Log.d("myLog", "PaginationListener: loadMoreItems()")
                 loadMoreItems()
             }
         }
+
     }
 
     protected abstract fun loadMoreItems()

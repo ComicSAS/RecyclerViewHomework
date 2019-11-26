@@ -1,22 +1,28 @@
 package com.example.recyclerviewhomework.presentation.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerviewhomework.R
 import com.example.recyclerviewhomework.databinding.ItemBinding
-import com.example.recyclerviewhomework.usecases.repository.data_source.database.entity.User
 import com.example.recyclerviewhomework.presentation.item.IClickListener
 import com.example.recyclerviewhomework.presentation.item.UserViewHolder
+import com.example.recyclerviewhomework.usecases.repository.data_source.database.entity.User
 import java.util.*
 
 class UserArrayAdapter(private val onItemClick: IClickListener<User>) : RecyclerView.Adapter<UserViewHolder>() {
 
     private val userList: ArrayList<User>?
 
+    private var countPrev: Int
+
+    private var countNew = 0
+
     init {
         this.userList = ArrayList()
+        this.countPrev = userList.count()
     }
 
     // specify the row layout file and click for each row
@@ -41,8 +47,13 @@ class UserArrayAdapter(private val onItemClick: IClickListener<User>) : Recycler
             return
         else if (users.isEmpty())
             return
-        else {
-            userList!!.addAll(users)
+        else if (countPrev < users.count()) {
+            countNew = users.count() - 1
+            Log.d("myLog", "UserArrayAdapter: countPrev = $countPrev, countNew = $countNew")
+            for (i in countPrev..countNew)
+                userList?.add(users[i])
+            countPrev = userList!!.count()
+            Log.d("myLog", "UserArrayAdapter: countPrev = $countPrev")
             //update state of list inside Adapter
             notifyDataSetChanged()
         }

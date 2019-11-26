@@ -16,4 +16,7 @@ interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertList(list: MutableList<User>)
+
+    @Query("DELETE FROM users")
+    fun clearTable()
 }
