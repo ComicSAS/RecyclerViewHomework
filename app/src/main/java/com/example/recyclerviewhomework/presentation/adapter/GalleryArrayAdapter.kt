@@ -1,21 +1,21 @@
 package com.example.recyclerviewhomework.presentation.adapter
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerviewhomework.R
 import com.example.recyclerviewhomework.databinding.GalleryItemBinding
-import com.example.recyclerviewhomework.usecases.repository.data_source.database.entity.Gallery
 import com.example.recyclerviewhomework.presentation.item.IClickListener
-import java.util.*
+import com.example.recyclerviewhomework.usecases.repository.data_source.database.entity.Picture
 
 class GalleryArrayAdapter : RecyclerView.Adapter<GallaryViewHolder>() {
 
-    private val galleryList: ArrayList<Gallery>? = ArrayList()
+    private val galleryList: MutableList<Picture> = mutableListOf()
 
-    private val onLongItemClick = object : IClickListener<Gallery> {
-        override fun onItemClick(model: Gallery): Boolean {
+    private val onLongItemClick = object : IClickListener<Picture> {
+        override fun onItemClick(model: Picture): Boolean {
             removeItem(galleryList!!.indexOf(model))
             return true
         }
@@ -29,23 +29,23 @@ class GalleryArrayAdapter : RecyclerView.Adapter<GallaryViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: GallaryViewHolder, position: Int) {
-        val gallery = galleryList!![position]
-        holder.bindPicture(gallery)
+        val picture = galleryList!![position]
+        holder.bindPicture(picture)
     }
 
     override fun getItemCount(): Int {
         return galleryList?.size ?: 0
     }
 
-    fun addItems(gallery: List<Gallery>?) {
-        if (gallery == null)
-            return
-        else if (gallery.isEmpty())
-            return
-        else {
-            galleryList!!.addAll(gallery)
-            //update state of list inside Adapter
-            notifyDataSetChanged()
+    fun addItems(gallery: MutableList<Picture>) {
+        when {
+            gallery == null -> return
+            gallery.isEmpty() -> return
+            else -> {
+                galleryList!!.addAll(gallery)
+                //update state of list inside Adapter
+                notifyDataSetChanged()
+            }
         }
     }
 

@@ -1,10 +1,13 @@
 package com.example.recyclerviewhomework.usecases.repository.data_source.database.entity
 
 import android.net.Uri
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity(tableName = "users")
 data class User(
         @PrimaryKey(autoGenerate = true)
@@ -17,4 +20,5 @@ data class User(
         @SerializedName("description")
         val description: String,
         @SerializedName("image")
-        val image: Uri)
+        val image: Uri,
+        val gallery: Gallery):Parcelable

@@ -29,11 +29,12 @@ class MainActivity : BaseActivity() {
 
     val onItemClick = object : IClickListener<User> {
         override fun onItemClick(model: User): Boolean {
-            intentDetail.putExtra("ID", model.id)
-            intentDetail.putExtra("name", model.name)
-            intentDetail.putExtra("description", model.description)
-            intentDetail.putExtra("birthDate", model.birthDate)
-            intentDetail.data = model.image
+//            intentDetail.putExtra("ID", model.id)
+//            intentDetail.putExtra("name", model.name)
+//            intentDetail.putExtra("description", model.description)
+//            intentDetail.putExtra("birthDate", model.birthDate)
+//            intentDetail.data = model.image
+            intentDetail.putExtra("user", model)
             startActivity(intentDetail)
             return true
         }

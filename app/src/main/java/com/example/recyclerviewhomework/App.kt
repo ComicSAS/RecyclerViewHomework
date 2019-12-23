@@ -36,9 +36,7 @@ class App : Application() {
     private fun initRoom() {
         dataBase = Room.databaseBuilder(this, AppDatabase::class.java, "database")
                 .allowMainThreadQueries()
-                .fallbackToDestructiveMigration()
                 .build()
-
     }
 
     private fun initDagger() {

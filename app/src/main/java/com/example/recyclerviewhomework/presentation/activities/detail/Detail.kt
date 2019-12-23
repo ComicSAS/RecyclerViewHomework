@@ -11,16 +11,18 @@ import com.example.recyclerviewhomework.R
 import com.example.recyclerviewhomework.databinding.ActivityDetailBinding
 import com.example.recyclerviewhomework.presentation.adapter.GalleryArrayAdapter
 import com.example.recyclerviewhomework.usecases.repository.data_source.database.entity.Gallery
+import com.example.recyclerviewhomework.usecases.repository.data_source.database.entity.Picture
 import com.example.recyclerviewhomework.usecases.repository.data_source.database.entity.User
 import com.example.recyclerviewhomework.usecases.repository.data_source.database.entity.model.DataClass.imageArray
 import kotlinx.android.synthetic.main.activity_detail.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 class Detail : AppCompatActivity() {
 
-    var pictures = imageArray
+//    var pictures = imageArray
 
-    private val galleryList = ArrayList<Gallery>()
+    lateinit var galleryList:MutableList<Picture>
 
     lateinit var name: String
     lateinit var birthDate: String
@@ -36,12 +38,12 @@ class Detail : AppCompatActivity() {
         setUI()
     }
 
-    private fun initGallery() {
-        for (i in 0..11) {
-            val uri = Uri.parse(pictures[i])
-            galleryList.add(Gallery(0, uri))
-        }
-    }
+//    private fun initGallery() {
+//        for (i in 0..11) {
+//            val uri = Uri.parse(pictures[i])
+//            galleryList.add(Gallery(0, uri))
+//        }
+//    }
 
     private fun setUI() {
         initBinding()
@@ -53,18 +55,22 @@ class Detail : AppCompatActivity() {
         rvDetail.itemAnimator = DefaultItemAnimator()
         rvDetail.adapter = galleryArrayAdapter
 
-        initGallery()
+//        initGallery()
         galleryArrayAdapter.addItems(galleryList)
     }
 
     private fun initBinding() {
         val intent = intent
-        val id = intent.getIntExtra("ID", 0)
-        uri = intent.data
-        name = intent.getStringExtra("name")
-        birthDate = intent.getStringExtra("birthDate")
-        description = intent.getStringExtra("description")
-        val user = User(id, name, birthDate, description, uri)
+//        val id = intent.getIntExtra("ID", 0)
+//        uri = intent.data
+//        name = intent.getStringExtra("name")
+//        birthDate = intent.getStringExtra("birthDate")
+//        description = intent.getStringExtra("description")
+        val user: User = intent.getParcelableExtra("user")
+        name = user.name
+        birthDate = user.birthDate
+        description = user.description
+        galleryList = user.gallery.gallery
         val binding: ActivityDetailBinding =
                 DataBindingUtil.setContentView(this, R.layout.activity_detail)
         binding.user = user

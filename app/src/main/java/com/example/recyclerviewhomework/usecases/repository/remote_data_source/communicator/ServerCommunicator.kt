@@ -2,6 +2,8 @@ package com.example.recyclerviewhomework.usecases.repository.remote_data_source.
 
 import android.net.Uri
 import android.util.Log
+import com.example.recyclerviewhomework.usecases.repository.data_source.database.entity.Gallery
+import com.example.recyclerviewhomework.usecases.repository.data_source.database.entity.Picture
 import com.example.recyclerviewhomework.usecases.repository.data_source.database.entity.User
 import com.example.recyclerviewhomework.usecases.repository.data_source.database.entity.model.DataClass
 import io.reactivex.Single
@@ -43,6 +45,12 @@ class ServerCommunicator {
     fun getUserById(id: Int): Single<User> = Single.just(initData()[id])
 
     fun initData(): MutableList<User> {
+        val galleryList = mutableListOf<Picture>()
+        for (i in 0..12) {
+            val uri = Uri.parse(images[i])
+            galleryList.add(Picture(0, uri))
+        }
+
         val userList = mutableListOf<User>()
         // Populating list items
         for (i in 0..24) {
@@ -51,7 +59,7 @@ class ServerCommunicator {
             val uri = Uri.parse(images[i])
             userList.add(User(0, name, dateOfBirth,
                     "Description " + "\nCool Person"
-                            + "\nGreat Guy!", uri))
+                            + "\nGreat Guy!", uri, Gallery(0, galleryList)))
         }
         return userList
     }

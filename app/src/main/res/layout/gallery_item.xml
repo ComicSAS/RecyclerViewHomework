@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="gallery"
-            type="com.example.recyclerviewhomework.usecases.repository.data_source.database.entity.Gallery" />
+            name="picture"
+            type="com.example.recyclerviewhomework.usecases.repository.data_source.database.entity.Picture" />
     </data>
 
     <LinearLayout
@@ -22,7 +22,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/indentation_8"
             android:gravity="center"
-            bind:picture_url="@{gallery.picture}"
+            bind:picture_url="@{picture.picture}"
             tools:ignore="ContentDescription" />
 
     </LinearLayout>
