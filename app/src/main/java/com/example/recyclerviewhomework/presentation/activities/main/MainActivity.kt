@@ -1,5 +1,6 @@
 package com.example.recyclerviewhomework.presentation.activities.main
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -23,19 +24,16 @@ class MainActivity : BaseActivity() {
 
     lateinit var intentDetail: Intent
 
+    lateinit var user: User
+
     private lateinit var userArrayAdapter: UserArrayAdapter
 
     private lateinit var layoutManager: LinearLayoutManager
 
     val onItemClick = object : IClickListener<User> {
         override fun onItemClick(model: User): Boolean {
-//            intentDetail.putExtra("ID", model.id)
-//            intentDetail.putExtra("name", model.name)
-//            intentDetail.putExtra("description", model.description)
-//            intentDetail.putExtra("birthDate", model.birthDate)
-//            intentDetail.data = model.image
             intentDetail.putExtra("user", model)
-            startActivity(intentDetail)
+            startActivityForResult(intentDetail, RC_DETAIL)
             return true
         }
 
@@ -77,5 +75,19 @@ class MainActivity : BaseActivity() {
         item_list.layoutManager = layoutManager
         item_list.itemAnimator = DefaultItemAnimator()
         item_list.adapter = userArrayAdapter
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when {
+            resultCode == Activity.RESULT_CANCELED -> return
+            resultCode == Activity.RESULT_OK && requestCode == RC_DETAIL -> {
+
+            }
+        }
+    }
+
+    companion object {
+        const val RC_DETAIL = 0
     }
 }

@@ -1,7 +1,9 @@
 package com.example.recyclerviewhomework.presentation.activities.detail
 
-import android.net.Uri
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -10,24 +12,20 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.recyclerviewhomework.R
 import com.example.recyclerviewhomework.databinding.ActivityDetailBinding
 import com.example.recyclerviewhomework.presentation.adapter.GalleryArrayAdapter
-import com.example.recyclerviewhomework.usecases.repository.data_source.database.entity.Gallery
 import com.example.recyclerviewhomework.usecases.repository.data_source.database.entity.Picture
 import com.example.recyclerviewhomework.usecases.repository.data_source.database.entity.User
-import com.example.recyclerviewhomework.usecases.repository.data_source.database.entity.model.DataClass.imageArray
 import kotlinx.android.synthetic.main.activity_detail.*
 import java.util.*
-import kotlin.collections.ArrayList
 
 class Detail : AppCompatActivity() {
-
-//    var pictures = imageArray
-
-    lateinit var galleryList:MutableList<Picture>
 
     lateinit var name: String
     lateinit var birthDate: String
     lateinit var description: String
-    lateinit var uri: Uri
+
+    lateinit var galleryList: MutableList<Picture>
+
+    lateinit var user: User
 
     private val galleryArrayAdapter = GalleryArrayAdapter()
 
@@ -66,7 +64,7 @@ class Detail : AppCompatActivity() {
 //        name = intent.getStringExtra("name")
 //        birthDate = intent.getStringExtra("birthDate")
 //        description = intent.getStringExtra("description")
-        val user: User = intent.getParcelableExtra("user")
+        user = intent.getParcelableExtra("user")
         name = user.name
         birthDate = user.birthDate
         description = user.description
@@ -74,5 +72,21 @@ class Detail : AppCompatActivity() {
         val binding: ActivityDetailBinding =
                 DataBindingUtil.setContentView(this, R.layout.activity_detail)
         binding.user = user
+    }
+
+    override fun onBackPressed() {
+        when (val changedGallery = galleryArrayAdapter.getChangedGallery()) {
+            galleryList -> {
+                Log.d("myLogs", "Gallery is the same: ${changedGallery == galleryList}")
+                setResult(Activity.RESULT_CANCELED)
+            }
+            else -> {
+                user.gallery.gallery.clear()
+                user.gallery.gallery.addAll(changedGallery)
+                val intent = Intent().putExtra("changedUser", user)
+                setResult(Activity.RESULT_OK, intent)
+            }
+        }
+        finish()
     }
 }

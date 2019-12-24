@@ -47,8 +47,8 @@ class ServerCommunicator {
     fun initData(): MutableList<User> {
         val galleryList = mutableListOf<Picture>()
         for (i in 0..12) {
-            val uri = Uri.parse(images[i])
-            galleryList.add(Picture(0, uri))
+            val url = images[i]
+            galleryList.add(Picture(0, url))
         }
 
         val userList = mutableListOf<User>()
@@ -56,10 +56,10 @@ class ServerCommunicator {
         for (i in 0..24) {
             val name = names[i]
             val dateOfBirth = birthDates[i]
-            val uri = Uri.parse(images[i])
+            val url = images[i]
             userList.add(User(0, name, dateOfBirth,
                     "Description " + "\nCool Person"
-                            + "\nGreat Guy!", uri, Gallery(0, galleryList)))
+                            + "\nGreat Guy!", url, Gallery(0, galleryList)))
         }
         return userList
     }

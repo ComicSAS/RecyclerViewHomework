@@ -20,5 +20,5 @@ data class User(
         @SerializedName("description")
         val description: String,
         @SerializedName("image")
-        val image: Uri,
+        val image: String,
         val gallery: Gallery):Parcelable

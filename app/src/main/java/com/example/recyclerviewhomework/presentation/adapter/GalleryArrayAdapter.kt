@@ -1,6 +1,5 @@
 package com.example.recyclerviewhomework.presentation.adapter
 
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -53,5 +52,7 @@ class GalleryArrayAdapter : RecyclerView.Adapter<GallaryViewHolder>() {
         galleryList!!.removeAt(position)
         notifyItemRemoved(position)
     }
+
+    fun getChangedGallery(): MutableList<Picture> = galleryList
 
 }
