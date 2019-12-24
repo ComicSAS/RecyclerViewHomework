@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerviewhomework.R
 import com.example.recyclerviewhomework.databinding.GalleryItemBinding
+import com.example.recyclerviewhomework.presentation.item.GallaryViewHolder
 import com.example.recyclerviewhomework.presentation.item.IClickListener
 import com.example.recyclerviewhomework.usecases.repository.data_source.database.entity.Picture
 

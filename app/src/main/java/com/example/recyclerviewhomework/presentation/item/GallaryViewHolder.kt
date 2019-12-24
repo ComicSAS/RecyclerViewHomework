@@ -1,4 +1,4 @@
-package com.example.recyclerviewhomework.presentation.adapter
+package com.example.recyclerviewhomework.presentation.item
 
 import android.net.Uri
 import androidx.recyclerview.widget.RecyclerView

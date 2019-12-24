@@ -9,7 +9,7 @@ interface UserDao {
     fun getAll(): MutableList<User>
 
     @Query("SELECT * FROM users WHERE id = :id")
-    fun getById(id: Int): User
+    fun getUserById(id: Int): User
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertList(list: MutableList<User>)

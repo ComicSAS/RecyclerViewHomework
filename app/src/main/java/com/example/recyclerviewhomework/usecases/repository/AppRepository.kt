@@ -16,15 +16,16 @@ class AppRepository(private val serverCommunicator: ServerCommunicator, private 
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 
-    fun getUser(id: Int): Single<User> = serverCommunicator.getUser(id)
-            .map {
-                val user = mainDatabase.userDao().getById(id)
-                user
-            }
+    fun getUserbyId(id: Int): Single<User> = Single.just(mainDatabase.userDao().getUserById(id))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 
     fun clearUsersTable() {
         mainDatabase.userDao().clearTable()
     }
+
+    fun updateUser(user: User) {
+        mainDatabase.userDao().updateUser(user)
+    }
+
 }

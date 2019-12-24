@@ -8,9 +8,13 @@ class Interactor(private val repository: AppRepository) {
 
     fun getAll(): Single<MutableList<User>>? = repository.getAll()
 
-    fun getUser(id: Int): Single<User> = repository.getUser(id)
+    fun getUserById(id: Int): Single<User> = repository.getUserbyId(id)
 
-    fun clearUsersTable(){
+    fun clearUsersTable() {
         repository.clearUsersTable()
+    }
+
+    fun updateUser(user: User) {
+        repository.updateUser(user)
     }
 }

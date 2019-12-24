@@ -55,4 +55,9 @@ class UserArrayAdapter(private val onItemClick: IClickListener<User>) : Recycler
             }
         }
     }
+
+    fun updateItem(user: User) {
+        userList?.set(user.id, user)
+        notifyItemChanged(user.id)
+    }
 }

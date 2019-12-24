@@ -12,6 +12,8 @@ class AllUserViewModel(app: Application, private val interactor: Interactor) : B
 
     private val liveDataItems = SingleLiveEvent<MutableList<User>>()
 
+    private val liveDataItem = SingleLiveEvent<User>()
+
     @SuppressLint("CheckResult")
     fun getAllItems(): Disposable? =
             interactor.getAll()?.subscribe { list -> liveDataItems.value = list }
@@ -19,9 +21,18 @@ class AllUserViewModel(app: Application, private val interactor: Interactor) : B
 
     fun getLiveDataItems(): LiveData<MutableList<User>> = liveDataItems
 
+    fun getLiveDataItem(): LiveData<User> = liveDataItem
+
     fun clearUsersTable() {
         interactor.clearUsersTable()
     }
+
+    fun updateUser(user: User) {
+        interactor.updateUser(user)
+    }
+
+    fun getUserById(id: Int): Disposable? =
+            interactor.getUserById(id).subscribe { item -> liveDataItem.value = item }
 
     override fun onCleared() {
         super.onCleared()

@@ -3,6 +3,7 @@ package com.example.recyclerviewhomework.presentation.activities.main
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recyclerviewhomework.R
@@ -59,12 +60,15 @@ class MainActivity : BaseActivity() {
     private fun initViewModel() {
         viewModel?.clearUsersTable()
         viewModel?.getAllItems()
-        viewModel?.getLiveDataItems()?.observe(this,
-                androidx.lifecycle.Observer { loadData(it) })
+        viewModel?.getLiveDataItems()?.observe(this, Observer { loadData(it) })
     }
 
     private fun loadData(list: MutableList<User>) {
         userArrayAdapter.addItems(list)
+    }
+
+    private fun loadUpdatedUser(user: User) {
+        userArrayAdapter.updateItem(user)
     }
 
     private fun initRecyclerView() {
@@ -82,7 +86,10 @@ class MainActivity : BaseActivity() {
         when {
             resultCode == Activity.RESULT_CANCELED -> return
             resultCode == Activity.RESULT_OK && requestCode == RC_DETAIL -> {
-
+                user = data!!.getParcelableExtra("changedUser")
+                viewModel?.updateUser(user)
+                viewModel?.getUserById(user.id)
+                viewModel?.getLiveDataItem()?.observe(this, Observer { loadUpdatedUser(it) })
             }
         }
     }
