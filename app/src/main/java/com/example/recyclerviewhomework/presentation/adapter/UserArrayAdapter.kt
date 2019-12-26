@@ -1,5 +1,6 @@
 package com.example.recyclerviewhomework.presentation.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -18,6 +19,8 @@ class UserArrayAdapter(private val onItemClick: IClickListener<User>) : Recycler
     private var countPrev: Int
 
     private var countNew = 0
+
+    private var firstUserId: Int = 0
 
     init {
         this.userList = ArrayList()
@@ -42,8 +45,9 @@ class UserArrayAdapter(private val onItemClick: IClickListener<User>) : Recycler
     }
 
     fun addItems(users: MutableList<User>?) {
+        firstUserId = users!![0].id
+        Log.d("myLogs", "UserAdapter: firstUserId: $firstUserId")
         when {
-            users == null -> return
             users.isEmpty() -> return
             countPrev < users.count() -> {
                 countNew = users.count() - 1
@@ -57,7 +61,8 @@ class UserArrayAdapter(private val onItemClick: IClickListener<User>) : Recycler
     }
 
     fun updateItem(user: User) {
-        userList?.set(user.id, user)
-        notifyItemChanged(user.id)
+        Log.d("myLogs", "UserAdapter: updateId: ${user.id - firstUserId}, userGallerySize: ${user.gallery.gallery.size}")
+        userList?.set(user.id - firstUserId, user)
+        notifyItemChanged(user.id - firstUserId)
     }
 }

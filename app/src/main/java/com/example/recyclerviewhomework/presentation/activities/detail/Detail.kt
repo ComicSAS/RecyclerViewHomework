@@ -81,8 +81,10 @@ class Detail : AppCompatActivity() {
                 setResult(Activity.RESULT_CANCELED)
             }
             else -> {
+                Log.d("myLogs", "Detail: userGallery size: ${user.gallery.gallery.size}")
                 user.gallery.gallery.clear()
                 user.gallery.gallery.addAll(changedGallery)
+                Log.d("myLogs", "Detail: userGallery size: ${user.gallery.gallery.size}")
                 val intent = Intent().putExtra("changedUser", user)
                 setResult(Activity.RESULT_OK, intent)
             }

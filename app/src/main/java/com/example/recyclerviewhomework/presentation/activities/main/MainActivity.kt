@@ -3,6 +3,7 @@ package com.example.recyclerviewhomework.presentation.activities.main
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -87,7 +88,9 @@ class MainActivity : BaseActivity() {
             resultCode == Activity.RESULT_CANCELED -> return
             resultCode == Activity.RESULT_OK && requestCode == RC_DETAIL -> {
                 user = data!!.getParcelableExtra("changedUser")
+                Log.d("myLogs", "Main: userGallery size: ${user.gallery.gallery.size}")
                 viewModel?.updateUser(user)
+                Log.d("myLogs", "Main: userId: ${user.id}")
                 viewModel?.getUserById(user.id)
                 viewModel?.getLiveDataItem()?.observe(this, Observer { loadUpdatedUser(it) })
             }
