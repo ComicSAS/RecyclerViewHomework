@@ -3,7 +3,6 @@ package com.example.recyclerviewhomework.presentation.activities.main
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -35,6 +34,7 @@ class MainActivity : BaseActivity() {
     val onItemClick = object : IClickListener<User> {
         override fun onItemClick(model: User): Boolean {
             intentDetail.putExtra("user", model)
+            user = model
             startActivityForResult(intentDetail, RC_DETAIL)
             return true
         }
@@ -46,6 +46,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppBar)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initRecyclerView()
@@ -85,15 +86,15 @@ class MainActivity : BaseActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when {
-            resultCode == Activity.RESULT_CANCELED -> return
             resultCode == Activity.RESULT_OK && requestCode == RC_DETAIL -> {
-                user = data!!.getParcelableExtra("changedUser")
-                Log.d("myLogs", "Main: userGallery size: ${user.gallery.gallery.size}")
-                viewModel?.updateUser(user)
-                Log.d("myLogs", "Main: userId: ${user.id}")
-                viewModel?.getUserById(user.id)
-                viewModel?.getLiveDataItem()?.observe(this, Observer { loadUpdatedUser(it) })
+                val changedUser: User = data!!.getParcelableExtra("changedUser")
+                if(user != changedUser){
+                    viewModel?.updateUser(changedUser)
+                    viewModel?.getUserById(changedUser.id)
+                    viewModel?.getLiveDataItem()?.observe(this, Observer { loadUpdatedUser(it) })
+                }
             }
+            else -> return
         }
     }
 

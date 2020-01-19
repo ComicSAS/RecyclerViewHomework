@@ -48,7 +48,7 @@ class ServerCommunicator {
         val galleryList = mutableListOf<Picture>()
         for (i in 0..12) {
             val url = images[i]
-            galleryList.add(Picture(0, url))
+            galleryList.add(Picture(i, url))
         }
 
         val userList = mutableListOf<User>()

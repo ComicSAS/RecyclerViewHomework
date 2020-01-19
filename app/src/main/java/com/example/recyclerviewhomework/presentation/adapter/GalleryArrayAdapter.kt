@@ -10,13 +10,17 @@ import com.example.recyclerviewhomework.presentation.item.GallaryViewHolder
 import com.example.recyclerviewhomework.presentation.item.IClickListener
 import com.example.recyclerviewhomework.usecases.repository.data_source.database.entity.Picture
 
-class GalleryArrayAdapter : RecyclerView.Adapter<GallaryViewHolder>() {
+class GalleryArrayAdapter(private val onItemClick: IClickListener<Picture>) : RecyclerView.Adapter<GallaryViewHolder>() {
 
     private val galleryList: MutableList<Picture> = mutableListOf()
 
     private val onLongItemClick = object : IClickListener<Picture> {
         override fun onItemClick(model: Picture): Boolean {
-            removeItem(galleryList!!.indexOf(model))
+            removeItem(galleryList.indexOf(model))
+            galleryList.forEach {
+                if (it.id > model.id)
+                    it.id--
+            }
             return true
         }
 
@@ -25,24 +29,23 @@ class GalleryArrayAdapter : RecyclerView.Adapter<GallaryViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GallaryViewHolder {
         val view = LayoutInflater.from(parent.context)
         val binding: GalleryItemBinding = DataBindingUtil.inflate(view, R.layout.gallery_item, parent, false)
-        return GallaryViewHolder(binding, onLongItemClick)
+        return GallaryViewHolder(binding, onLongItemClick, onItemClick)
     }
 
     override fun onBindViewHolder(holder: GallaryViewHolder, position: Int) {
-        val picture = galleryList!![position]
+        val picture = galleryList[position]
         holder.bindPicture(picture)
     }
 
     override fun getItemCount(): Int {
-        return galleryList?.size ?: 0
+        return galleryList.size
     }
 
     fun addItems(gallery: MutableList<Picture>) {
         when {
-            gallery == null -> return
-            gallery.isEmpty() -> return
+            gallery.isNullOrEmpty() -> return
             else -> {
-                galleryList!!.addAll(gallery)
+                galleryList.addAll(gallery)
                 //update state of list inside Adapter
                 notifyDataSetChanged()
             }
@@ -50,7 +53,7 @@ class GalleryArrayAdapter : RecyclerView.Adapter<GallaryViewHolder>() {
     }
 
     fun removeItem(position: Int) {
-        galleryList!!.removeAt(position)
+        galleryList.removeAt(position)
         notifyItemRemoved(position)
     }
 

@@ -46,9 +46,8 @@ class UserArrayAdapter(private val onItemClick: IClickListener<User>) : Recycler
 
     fun addItems(users: MutableList<User>?) {
         firstUserId = users!![0].id
-        Log.d("myLogs", "UserAdapter: firstUserId: $firstUserId")
         when {
-            users.isEmpty() -> return
+            users.isNullOrEmpty() -> return
             countPrev < users.count() -> {
                 countNew = users.count() - 1
                 for (i in countPrev..countNew)
@@ -61,7 +60,6 @@ class UserArrayAdapter(private val onItemClick: IClickListener<User>) : Recycler
     }
 
     fun updateItem(user: User) {
-        Log.d("myLogs", "UserAdapter: updateId: ${user.id - firstUserId}, userGallerySize: ${user.gallery.gallery.size}")
         userList?.set(user.id - firstUserId, user)
         notifyItemChanged(user.id - firstUserId)
     }

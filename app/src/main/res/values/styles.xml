@@ -1,5 +1,4 @@
 <resources>
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@android:color/black</item>
@@ -8,5 +7,10 @@
         <item name="android:textColorPrimary">@android:color/black</item>
     </style>
 
+    <!-- Launcher theme -->
+    <style name="AppBar.Launcher">
+        <item name="android:windowBackground">@drawable/launcher_screen</item>
+    </style>
+    <!-- Base application theme. -->
     <style name="AppBar" parent="Theme.AppCompat.Light.DarkActionBar" />
 </resources>
