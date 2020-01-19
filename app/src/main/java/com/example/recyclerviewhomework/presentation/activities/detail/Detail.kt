@@ -3,6 +3,8 @@ package com.example.recyclerviewhomework.presentation.activities.detail
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -11,6 +13,7 @@ import com.example.recyclerviewhomework.R
 import com.example.recyclerviewhomework.databinding.ActivityDetailBinding
 import com.example.recyclerviewhomework.presentation.adapter.GalleryArrayAdapter
 import com.example.recyclerviewhomework.presentation.item.IClickListener
+import com.example.recyclerviewhomework.usecases.repository.data_source.database.entity.Gallery
 import com.example.recyclerviewhomework.usecases.repository.data_source.database.entity.Picture
 import com.example.recyclerviewhomework.usecases.repository.data_source.database.entity.User
 import kotlinx.android.synthetic.main.activity_detail.*
@@ -79,6 +82,7 @@ class Detail : AppCompatActivity() {
         val binding: ActivityDetailBinding =
                 DataBindingUtil.setContentView(this, R.layout.activity_detail)
         binding.user = user
+        binding.detail = this
     }
 
     override fun onBackPressed() {
@@ -88,6 +92,14 @@ class Detail : AppCompatActivity() {
         val intent = Intent().putExtra("changedUser", user)
         setResult(Activity.RESULT_OK, intent)
         finish()
+    }
+
+    fun openAvatar(view: View) {
+        Log.d("myLogs", "openAvatar")
+        val galleryAvatar = Gallery(0, mutableListOf(Picture(0, user.image)))
+        intentGalleryDetail.putExtra("GALLERY", galleryAvatar)
+
+        startActivity(intentGalleryDetail)
     }
 }
 

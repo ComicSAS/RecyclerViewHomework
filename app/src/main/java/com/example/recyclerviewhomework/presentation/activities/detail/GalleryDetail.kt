@@ -18,8 +18,6 @@ class GalleryDetail : AppCompatActivity() {
 
     private lateinit var galleryImagesAdapter: GalleryImagesAdapter
 
-//    private lateinit var viewPagerArrowIndicator: ViewPagerArrowIndicator
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gallery_detail)

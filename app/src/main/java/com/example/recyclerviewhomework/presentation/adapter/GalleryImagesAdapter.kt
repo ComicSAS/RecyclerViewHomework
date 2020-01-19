@@ -21,6 +21,7 @@ class GalleryImagesAdapter(private val mContext: Context, private val mImages: L
         Glide.with(mContext)
                 .load(mImages[position].picture)
                 .dontAnimate()
+                .fitCenter()
                 .into(imageView)
 
         container.addView(imageLayout)
