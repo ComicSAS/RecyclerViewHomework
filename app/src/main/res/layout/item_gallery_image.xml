@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/iv_gallery_image"
+    <data>
+        <variable
+            name="picture"
+            type="com.example.recyclerviewhomework.usecases.repository.data_source.database.entity.Picture" />
+    </data>
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:adjustViewBounds="true"
-        android:layout_gravity="center"
-        android:src="@mipmap/ic_launcher"
-        android:background="#000"
-        android:scaleType="fitCenter" />
-</FrameLayout>
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_gallery_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:background="#000"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/ic_launcher"
+            bind:gallery_detail="@{picture.picture}"
+            tools:ignore="ContentDescription"/>
+    </FrameLayout>
+</layout>

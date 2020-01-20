@@ -4,29 +4,24 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import androidx.databinding.DataBindingUtil
 import androidx.viewpager.widget.PagerAdapter
-import com.bumptech.glide.Glide
 import com.example.recyclerviewhomework.R
+import com.example.recyclerviewhomework.databinding.ItemGalleryImageBinding
 import com.example.recyclerviewhomework.usecases.repository.data_source.database.entity.Picture
 
-class GalleryImagesAdapter(private val mContext: Context, private val mImages: List<Picture>) : PagerAdapter() {
+class GalleryImagesAdapter(private val cxt: Context, private val images: List<Picture>) : PagerAdapter() {
 
-    override fun getCount(): Int = mImages.size
+    override fun getCount(): Int = images.size
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val imageLayout = LayoutInflater.from(mContext).inflate(R.layout.item_gallery_image, container, false)
-        val imageView: ImageView = imageLayout.findViewById(R.id.iv_gallery_image)
+        val binding: ItemGalleryImageBinding = DataBindingUtil.inflate(
+                LayoutInflater.from(cxt), R.layout.item_gallery_image, container, false)
 
-        Glide.with(mContext)
-                .load(mImages[position].picture)
-                .dontAnimate()
-                .fitCenter()
-                .into(imageView)
+        binding.picture = images[position]
+        container.addView(binding.root)
 
-        container.addView(imageLayout)
-
-        return imageLayout
+        return binding.root
     }
 
     override fun setPrimaryItem(container: ViewGroup, position: Int, `object`: Any) {

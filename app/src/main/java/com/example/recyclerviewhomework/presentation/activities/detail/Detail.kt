@@ -3,7 +3,6 @@ package com.example.recyclerviewhomework.presentation.activities.detail
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -32,7 +31,7 @@ class Detail : AppCompatActivity() {
 
     private lateinit var galleryArrayAdapter: GalleryArrayAdapter
 
-    val onItemClick = object : IClickListener<Picture> {
+    private val onItemClick = object : IClickListener<Picture> {
         override fun onItemClick(model: Picture): Boolean {
             val changedGallery = galleryArrayAdapter.getChangedGallery()
             val gallery = user.gallery
@@ -95,7 +94,6 @@ class Detail : AppCompatActivity() {
     }
 
     fun openAvatar(view: View) {
-        Log.d("myLogs", "openAvatar")
         val galleryAvatar = Gallery(0, mutableListOf(Picture(0, user.image)))
         intentGalleryDetail.putExtra("GALLERY", galleryAvatar)
 
